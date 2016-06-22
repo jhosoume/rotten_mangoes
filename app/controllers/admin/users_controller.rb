@@ -7,12 +7,16 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    @users = User.order(:created_at).page(params[:page]).per(10)
+    @users = User.order(:created_at)
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   protected
