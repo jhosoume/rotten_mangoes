@@ -19,6 +19,7 @@ class Admin::UsersController < ApplicationController
 
   def is_admin?
     current_user ? current_user.admin : false
+    flash[:error] = "You must be logged in to access this section"
     redirect_to root_url
   end
 
