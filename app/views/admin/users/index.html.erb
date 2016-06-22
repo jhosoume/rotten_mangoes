@@ -1,0 +1,8 @@
+<h1>User [Admin Page]</h1>
+<% @users.each do |user| %>
+  <h2><%= link_to user.full_name, admin_user_path(user) %></h2>
+  <h3>Email: <%= user.email %></h3>
+  <h3>Date of Creation: <%= formatted_date(user.created_at) %></h3>
+  <h4>Admin: <%= user.admin %> </h4>
+  <hr>
+<% end %>
