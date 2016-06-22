@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.order(:created_at).page(params[:page]).per(10)
   end
 
   def destroy
