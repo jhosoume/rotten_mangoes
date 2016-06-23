@@ -3,8 +3,8 @@ class MoviesController < ApplicationController
   include MoviesHelper
 
   def index
-    if params[:title]
-      @movies = Movie.title(params[:title].strip).director(params[:director].strip).range_runtime(*range_duration(params[:runtime_in_minutes]))
+    if params[:title_or_director]
+      @movies = Movie.title_or_director(params[:title_or_director].strip).range_runtime(*range_duration(params[:runtime_in_minutes]))
     end
     @movies ||= Movie.all
   end

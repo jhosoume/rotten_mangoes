@@ -30,6 +30,10 @@ class Movie < ActiveRecord::Base
     where("director LIKE ?", "%#{director}%") 
   end
 
+  scope :title_or_director, -> (phrase) do 
+    where("title LIKE ? OR director LIKE ?", "%#{phrase}%", "%#{phrase}%") 
+  end
+
   scope :range_runtime, -> (min, max) do
     where("runtime_in_minutes BETWEEN ? AND ?", min, max) 
   end
