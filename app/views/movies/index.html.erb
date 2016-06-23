@@ -11,7 +11,7 @@
   <%= text_field_tag :director, nil, placeholder: "Search for movie by director" %>
 
   <%= label_tag(:runtime_in_minutes, "Runtime") %>
-  <%= select_tag(:runtime_in_minutes, options_for_select(["Under 90 minutes", "Between 90 and 120 minutes", "Over 120 minutes"])) %>
+  <%= select_tag(:runtime_in_minutes, options_for_select(["Any", "Under 90 minutes", "Between 90 and 120 minutes", "Over 120 minutes"])) %>
 
   <%= submit_tag("Search") %>
 <% end %>

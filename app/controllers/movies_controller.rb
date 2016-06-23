@@ -3,11 +3,7 @@ class MoviesController < ApplicationController
   include MoviesHelper
 
   def index
-    [:title, :director].each do |field|
-      @movies = Movie.select_by_attr(field, params[field], @movies) if params[field] && !params[field].empty?
-    end
-    @movies = Movie.select_by_duration(*range_duration(params[:runtime_in_minutes]), @movies) if params[:runtime_in_minutes] && params[:runtime_in_minutes].empty?
-    @movies ||= Movie.all
+    @movies = Movie.title(params[:title].strip).director(params[:director].strip).range_runtime(*range_duration(params[:runtime_in_minutes]))
   end
 
   def show

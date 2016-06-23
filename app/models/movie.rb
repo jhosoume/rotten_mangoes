@@ -22,18 +22,20 @@ class Movie < ActiveRecord::Base
 
   validate :release_date_is_in_the_past
 
+  scope :title, -> (title, movies = nil) do 
+    movies.where("title LIKE ?", "%#{title}%") 
+  end
+
+  scope :director, -> (director, movies = nil) do 
+    movies.where("director LIKE ?", "%#{director}%") 
+  end
+
+  scope :range_runtime, -> (min, max) do
+    movies.where("runtime_in_minutes BETWEEN ? AND ?", min, max) 
+  end
+
   def review_average
     reviews.size != 0 ? reviews.sum(:rating_out_of_ten)/reviews.size : 0
-  end
-
-  def self.select_by_attr(attr, value, movies = nil)
-    movies ||= self
-    movies.where("#{attr} LIKE ?", "%#{value}%")
-  end
-
-  def self.select_by_duration(min = 0, max = 5000, movies = nil)
-    movies ||= self
-    movies.where(runtime_in_minutes: (min..max))
   end
 
   protected
