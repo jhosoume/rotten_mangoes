@@ -1,4 +1,5 @@
 class Movie < ActiveRecord::Base
+  include MoviesHelper
 
   mount_uploader :poster_image, PosterImageUploader
 
@@ -23,6 +24,16 @@ class Movie < ActiveRecord::Base
 
   def review_average
     reviews.size != 0 ? reviews.sum(:rating_out_of_ten)/reviews.size : 0
+  end
+
+  def self.select_by_attr(attr, value, movies = nil)
+    movies ||= self
+    movies.where("#{attr} LIKE ?", "%#{value}%")
+  end
+
+  def self.select_by_duration(min = 0, max = 5000, movies = nil)
+    movies ||= self
+    movies.where(runtime_in_minutes: (min..max))
   end
 
   protected
