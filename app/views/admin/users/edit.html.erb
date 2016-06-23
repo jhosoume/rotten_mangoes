@@ -1,2 +1,4 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<%= link_to "Back to this user", admin_user_path(@user) %>
+
+<h2>Edit this user.</h2>
+<%= render 'users/form' %>
