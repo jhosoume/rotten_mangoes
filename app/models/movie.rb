@@ -22,16 +22,16 @@ class Movie < ActiveRecord::Base
 
   validate :release_date_is_in_the_past
 
-  scope :title, -> (title, movies = nil) do 
-    movies.where("title LIKE ?", "%#{title}%") 
+  scope :title, -> (title) do 
+    where("title LIKE ?", "%#{title}%") 
   end
 
-  scope :director, -> (director, movies = nil) do 
-    movies.where("director LIKE ?", "%#{director}%") 
+  scope :director, -> (director) do 
+    where("director LIKE ?", "%#{director}%") 
   end
 
   scope :range_runtime, -> (min, max) do
-    movies.where("runtime_in_minutes BETWEEN ? AND ?", min, max) 
+    where("runtime_in_minutes BETWEEN ? AND ?", min, max) 
   end
 
   def review_average
