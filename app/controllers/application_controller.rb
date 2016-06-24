@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  helper_method :current_user
-
   def is_admin?
     admin_authorization = current_user && current_user.admin
     #unless admin_authorization
@@ -26,6 +24,12 @@ class ApplicationController < ActionController::Base
     admin_authorization
   end
 
+  def is_impersonating?
+    session[:original_user] != nil
+  end
+
+  helper_method :current_user
   helper_method :is_admin?
+  helper_method :is_impersonating?
 
 end

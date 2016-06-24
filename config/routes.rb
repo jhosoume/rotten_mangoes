@@ -1,5 +1,6 @@
 RottenMangoes::Application.routes.draw do
 
+
   resources :movies do
     resources :reviews, only: [:new, :create]
   end
@@ -12,6 +13,9 @@ RottenMangoes::Application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :edit, :show, :update, :destroy]
+    get 'sessions/impersonate/:id' => 'sessions#impersonate'
   end
+
+    
 
 end
