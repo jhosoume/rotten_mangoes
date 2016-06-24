@@ -16,8 +16,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to movies_path, notice: "Adios!"
+    if is_impersonating?
+      session[:user_id] = session[:original_user]
+      session.delete(:original_user)
+      flash[:notice] = "Welcome back"
+      redirect_to :root
+    else
+      reset_session if current_user
+      redirect_to movies_path, notice: "Adios!"
+    end
   end
 
 end
