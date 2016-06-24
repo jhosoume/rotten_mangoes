@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
 
-  before_filter :is_admin?
+  before_filter :auth_admin
   
   def edit
     @user = User.find(params[:id])
@@ -37,6 +37,13 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(
       :email, :firstname, :lastname, :password, :password_confirmation, :admin
     )
+  end
+
+  def auth_admin
+    unless is_admin?
+      flash[:error] = "You must be logged in as admin to access this section"
+      redirect_to root_path
+    end
   end
 
 end
