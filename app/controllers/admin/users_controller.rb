@@ -33,17 +33,6 @@ class Admin::UsersController < ApplicationController
 
   protected
 
-  def is_admin?
-    admin_authorization = current_user && current_user.admin
-    unless admin_authorization
-      flash[:error] = "You must be logged in as admin to access this section"
-      redirect_to root_url
-    end
-    admin_authorization
-  end
-
-  helper_method :is_admin?
-
   def user_params
     params.require(:user).permit(
       :email, :firstname, :lastname, :password, :password_confirmation, :admin

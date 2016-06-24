@@ -18,4 +18,14 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  def is_admin?
+    admin_authorization = current_user && current_user.admin
+    #unless admin_authorization
+    #  flash[:error] = "You must be logged in as admin to access this section"
+    #end
+    admin_authorization
+  end
+
+  helper_method :is_admin?
+
 end
