@@ -1,10 +1,11 @@
 class MoviesController < ApplicationController
+  before_action :restrict_access, except: [:show, :index]
 
   include MoviesHelper
 
   def index
     if params[:title_or_director]
-      @movies = Movie.title_or_director(params[:title_or_director].strip).range_runtime(*range_duration(params[:runtime_in_minutes]))
+      @movies = Movie.by_title_or_director(params[:title_or_director].strip).range_runtime(*range_duration(params[:runtime_in_minutes]))
     end
     @movies ||= Movie.all
   end

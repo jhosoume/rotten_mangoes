@@ -17,11 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin?
-    admin_authorization = current_user && current_user.admin
-    #unless admin_authorization
-    #  flash[:error] = "You must be logged in as admin to access this section"
-    #end
-    admin_authorization
+    current_user && current_user.admin
   end
 
   def is_impersonating?

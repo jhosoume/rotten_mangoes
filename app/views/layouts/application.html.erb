@@ -9,10 +9,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% flash.each do |key, value| %>
-    <%= content_tag(:div, value) %>
-  <% end %>
-  <%= yield %>
-  <%= render 'layouts/footer' %>
+  <div class="row">
+    <!-- Nav Bar -->
+    <div class="small-2 column">
+    </div>
+    <!-- Nav Bar -->
+    <div>
+    <!-- Main Body -->
+    <div class="small-10 column">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value) %>
+      <% end %>
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+    </div>
+    <!-- Main Body -->
+  </div>
 </body>
 </html>
